@@ -6,7 +6,7 @@ Fetch with timeout support and an ability to set default settings
 
 Add the following line to the `.npmrc` in your project root.
 
-```:.npmrc
+```
 @akr4:registry=https://npm.pkg.github.com/akr4
 ```
 
