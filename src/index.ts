@@ -1,1 +1,1 @@
-export { makeFetch } from './fetch';
+export { makeFetch, mergeHeaders } from './fetch';

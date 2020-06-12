@@ -9,7 +9,7 @@ export const makeFetch = (defaultInit: MyRequestInit, mergeRequestInit: MergeReq
   };
 };
 
-export const simpleMerge: MergeRequestInit = (defaultInit, init) => {
+const simpleMerge: MergeRequestInit = (defaultInit, init) => {
   return {
     ...defaultInit,
     ...init,
