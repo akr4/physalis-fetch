@@ -1,0 +1,1 @@
+export { makeFetch } from './fetch';
