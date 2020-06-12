@@ -2,6 +2,20 @@
 
 Fetch with timeout support and an ability to set default settings
 
+## Installation
+
+Add the following line to the `.npmrc` in your project root.
+
+```:.npmrc
+@akr4:registry=https://npm.pkg.github.com/akr4
+```
+
+Then, install the package.
+
+```
+npm install @akr4/physalis-fetch
+```
+
 ## Usage
 
 Basic
