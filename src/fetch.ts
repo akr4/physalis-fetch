@@ -2,14 +2,15 @@ type MyRequestInit = RequestInit & { timeout?: number };
 type MyRequestInitFunc = (init: MyRequestInit) => MyRequestInit;
 type MyFetchType = (input: RequestInfo, init?: MyRequestInit) => Promise<Response>;
 
-type MergeRequestInit = (
-  defaultInit: MyRequestInit | MyRequestInitFunc,
-  init: MyRequestInit | undefined,
-) => MyRequestInit;
+type MergeRequestInit = (defaultInit: MyRequestInit, init: MyRequestInit | undefined) => MyRequestInit;
 
-export const makeFetch = (defaultInit: MyRequestInit, mergeRequestInit: MergeRequestInit = simpleMerge) => {
+export const makeFetch = (
+  defaultInit: MyRequestInit | MyRequestInitFunc,
+  mergeRequestInit: MergeRequestInit = simpleMerge,
+) => {
   return (input: RequestInfo, init?: MyRequestInit): Promise<Response> => {
-    return myFetch(input, mergeRequestInit(defaultInit, init));
+    const di = typeof defaultInit === 'function' ? defaultInit(init || {}) : defaultInit;
+    return myFetch(input, mergeRequestInit(di, init));
   };
 };
 
@@ -21,18 +22,14 @@ const simpleMerge: MergeRequestInit = (defaultInit, init) => {
 };
 
 export const mergeHeaders: MergeRequestInit = (defaultInit, init) => {
-  if (typeof defaultInit === 'function') {
-    return defaultInit(init || {});
-  } else {
-    return {
-      ...defaultInit,
-      ...init,
-      headers: {
-        ...defaultInit.headers,
-        ...init?.headers,
-      },
-    };
-  }
+  return {
+    ...defaultInit,
+    ...init,
+    headers: {
+      ...defaultInit.headers,
+      ...init?.headers,
+    },
+  };
 };
 
 const myFetch: MyFetchType = (input: RequestInfo, init?: MyRequestInit): Promise<Response> => {
