@@ -56,3 +56,14 @@ const response = await fetch('/foo', {
   headers: { 'X-Custom-Header2': 'bar' },
 });
 ```
+
+Evaluate options on every fetch
+
+```typescript
+import { makeFetch } from '@akr4/physalis-fetch';
+
+const fetch = makeFetch((init) => ({
+  timeout: 30 * 1000,
+  headers: { 'X-Custom-Header': getCustomHeaderValue() },
+}));
+```
