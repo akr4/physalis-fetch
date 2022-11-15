@@ -67,3 +67,12 @@ const fetch = makeFetch((init) => ({
   headers: { 'X-Custom-Header': getCustomHeaderValue() },
 }));
 ```
+
+## Release procedure
+
+1. Bump version
+2. Publish
+
+```bash
+npm publish
+```
